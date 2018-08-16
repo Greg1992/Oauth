@@ -1,9 +1,16 @@
 const express = require('express')
 const authRoutes = require('./routes/auth-routes');
+const passportSetup = require('./config/passport-setup');
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
 const app = express()
 
 app.set('view engine', 'ejs')
 
+//connect to mongodb
+mongoose.connect(keys.mongodb.dbURI, ()=>{
+  console.log('connecyte')
+})
 //routes setup
 app.use('/auth', authRoutes);
 
